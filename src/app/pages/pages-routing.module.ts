@@ -3,21 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 //Componentes
-import { MainPageComponent } from './main-page/main-page.component';
-import { MessagesComponent } from './main-page/messages/messages.component';
-import { OrdersComponent } from './main-page/orders/orders.component';
-import { ProductsComponent } from './main-page/products/products.component';
-import { SalesComponent } from './main-page/sales/sales.component';
-import { StoresComponent } from './main-page/stores/stores.component';
-import { SubcategoriesComponent } from './main-page/subcategories/subcategories.component';
-import { UsersComponent } from './main-page/users/users.component';
-import { CategoriesComponent } from './main-page/categories/categories.component';
-import { DisputesComponent } from './main-page/disputes/disputes.component';
+import { MainPageComponent } from './main-page/main-page.component';;
 import { Error404Component } from './main-page/error404/error404.component';
 
 
 
 const routes: Routes = [
+  {path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule)},
   { 
     path: '',
     component: MainPageComponent,

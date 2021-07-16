@@ -13,6 +13,7 @@ import { SubcategoriesComponent } from './main-page/subcategories/subcategories.
 import { UsersComponent } from './main-page/users/users.component';
 import { CategoriesComponent } from './main-page/categories/categories.component';
 import { DisputesComponent } from './main-page/disputes/disputes.component';
+import { Error404Component } from './main-page/error404/error404.component';
 
 
 
@@ -30,7 +31,8 @@ const routes: Routes = [
       {path: 'orders', loadChildren: () => import('./main-page/orders/orders.module').then(m => m.OrdersModule)},
       {path: 'sales', loadChildren: () => import('./main-page/sales/sales.module').then(m => m.SalesModule)},
       {path: 'disputes', loadChildren: () => import('./main-page/disputes/disputes.module').then(m => m.DisputesModule)},
-      {path: 'messages', loadChildren: () => import('./main-page/messages/messages.module').then(m => m.MessagesModule)}
+      {path: 'messages', loadChildren: () => import('./main-page/messages/messages.module').then(m => m.MessagesModule)},
+      {path: '**', component: Error404Component}
     ]
   }
 ];

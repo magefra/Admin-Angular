@@ -3,7 +3,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { functions } from '../helpers/functions';
 import {ILogin} from 'src/app/interface/ilogin'
 import { LoginService } from 'src/app/services/login.service';
-import {alerts} from 'src/app/pages/helpers/alert'
+import {alerts} from 'src/app/pages/helpers/alert';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -22,7 +24,8 @@ public f = this.fb.group(
   formSubmited = false;
 
   constructor(private fb : FormBuilder,
-              private loginService: LoginService) { }
+              private loginService: LoginService,
+              private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -46,7 +49,7 @@ public f = this.fb.group(
     this.loginService.login(data)
     .subscribe(
       (resp) =>{
-        console.log(resp)
+        this.router.navigateByUrl("/");
       },
       (err) =>{
         if(err.error.error.message == "EMAIL_NOT_FOUND"){

@@ -8,22 +8,39 @@
         <div class="card-body login-card-body">
           <p class="login-box-msg">Sign in to start your session</p>
     
-          <form action="../../index3.html" method="post">
+          <form 
+          autocomplete="off"
+          [formGroup] = "f"
+          (ngSubmit) = "login()"
+          >
             <div class="input-group mb-3">
-              <input type="email" class="form-control" placeholder="Email">
+              <input type="email" 
+                     class="form-control" 
+                     placeholder="Email"
+                     formControlName = "email"
+                     [ngClass] = "{'is-invalid' : invalidField('email')}"
+                     >
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-envelope"></span>
                 </div>
               </div>
+              <div class="invalid-feedback">Please fill out this field correctly</div>
             </div>
             <div class="input-group mb-3">
-              <input type="password" class="form-control" placeholder="Password">
+              <input type="password"
+                     class="form-control" 
+                     placeholder="Password"
+                     formControlName = "password"
+                     [ngClass] = "{'is-invalid' : invalidField('password')}"
+                     >
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-lock"></span>
                 </div>
               </div>
+              <div class="invalid-feedback">Please fill out this field correctly</div>
+
             </div>
             <div class="row">   
               <!-- /.col -->

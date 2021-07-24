@@ -10,7 +10,15 @@ import {map}  from 'rxjs/operators'
 export class LoginService {
 
   constructor(private http: HttpClient) { }
+  
+  
+  obtenerToken(){
+    let body = {
+      idToken: localStorage.getItem('token')
+    }
 
+   return this.http.post(environment.urlGetUser, body);
+  }
 
   login(data: ILogin){
     return this.http.post(environment.urlLogin,data)

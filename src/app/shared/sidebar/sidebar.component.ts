@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+   /* ===================================
+      Función de salida del sistema
+      ==================================== */
+  logout(){
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+    this.router.navigateByUrl('/login');
   }
 
 }

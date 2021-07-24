@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   urlFirebase : 'https://admin-mp-ab7bb-default-rtdb.firebaseio.com/',
-  urlLogin : 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBNydZHVThHy2nMs1k4PiaRw5mkN19P9Bs'
+  urlLogin : 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBNydZHVThHy2nMs1k4PiaRw5mkN19P9Bs',
+  urlGetUser: 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyBNydZHVThHy2nMs1k4PiaRw5mkN19P9Bs'
 };
 
 /*

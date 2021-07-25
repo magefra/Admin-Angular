@@ -79,9 +79,17 @@
                       </li>
 
                       <li class="py-2">
-                        <span class="mx-2 text-muted">·</span>
-                        <strong class=" mat-header-cell">Picture: </strong>
-                        {{element.picture}}
+                        <div *ngIf="element.method == 'google' || element.method == 'facebook'">
+                          <img src="{{element.picture}}" class="rounded-circle" width="100">
+                        </div>
+                        <div *ngIf="element.method == 'direct'">
+                          <div *ngIf="element.picture === ''">
+                            <img src="{{path}}users/default/default.png" class="rounded-circle" width="100">
+                          </div>
+                          <div *ngIf="element.picture != ''">
+                            <img src="{{path}}users/{{element.username}}/{{element.picture}}" class="rounded-circle" width="100">
+                          </div>
+                        </div>                         
                       </li>
 
                       <li class="py-2">

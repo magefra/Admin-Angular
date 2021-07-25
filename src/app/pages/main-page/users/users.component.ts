@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Iusers } from 'src/app/interface/iusers';
 import { UsersService } from 'src/app/services/users.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+
 
 import {MatTableDataSource} from '@angular/material/table';
 
@@ -19,7 +21,12 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class UsersComponent implements OnInit {
 
+ /* ===========================
+     Variable global que captura la ruta de los archivos de imagen
+     =========================== */  
+     path: string = environment.urlFiles;
 
+     
   /* ===========================
      Variable para nombrar las columnas de nuestras tablas en material    
      =========================== */  
@@ -28,31 +35,23 @@ export class UsersComponent implements OnInit {
                                     'email',
                                     'actions'];
 
-
-    /* displayedColumns: string[] = ['position', 
-                                  'displayName',
-                                  'username',
-                                  'email',
-                                  'picture',
-                                  'method',
-                                  'country',
-                                  'city',
-                                  'address',
-                                  'phone'
-                                      ]; */
    /* ===========================
      Variable global que instancie la tada que aparecerá en la tabla
      =========================== */  
     dataSource!: MatTableDataSource<Iusers>;
 
-  /* ===========================
-     Variable global de usuarios
-     =========================== */  
-  users: Iusers[] = [];
-/* ===========================
-     Variable global que informa a la vista cuando hay una expansión de la tabla.
-     =========================== */  
-  expandedElement!: Iusers | null;
+    /* ===========================
+      Variable global de usuarios
+      =========================== */  
+    users: Iusers[] = [];
+    /* ===========================
+      Variable global que informa a la vista cuando hay una expansión de la tabla.
+      =========================== */  
+    expandedElement!: Iusers | null;
+
+
+  
+
 
   constructor(private userService: UsersService) { }
 

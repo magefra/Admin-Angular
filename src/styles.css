@@ -12,3 +12,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   max-height: 400px;
   overflow-x: auto;
 }
+
+tr.example-detail-row {
+  height: 0 !important;
+}
+
+.example-element-detail {
+  overflow: hidden !important;
+  display: flex !important;
+}
+
+
+.example-element-row td {
+  border-bottom-width: 0 !important;
+}
+
+/*Para que el texto quede recortado con 3 puntos */
+td.mat-cell{
+  max-width: 200px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

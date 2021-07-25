@@ -1,13 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Iusers } from 'src/app/interface/iusers';
 import { UsersService } from 'src/app/services/users.service';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  styleUrls: ['./users.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ])
+  ]
 })
 export class UsersComponent implements OnInit {
 
@@ -41,7 +49,10 @@ export class UsersComponent implements OnInit {
      Variable global de usuarios
      =========================== */  
   users: Iusers[] = [];
-
+/* ===========================
+     Variable global que informa a la vista cuando hay una expansión de la tabla.
+     =========================== */  
+  expandedElement!: Iusers | null;
 
   constructor(private userService: UsersService) { }
 

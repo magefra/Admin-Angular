@@ -16,9 +16,10 @@ import { functions } from '../../helpers/functions';
   styleUrls: ['./users.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('collapsed, void', style({height: '0px', minHeight: '0', display: 'none'})),
       state('expanded', style({height: '*'})),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ])
   ]
 })
@@ -103,11 +104,11 @@ export class UsersComponent implements OnInit {
 
     this.userService.getData()
     .subscribe((resp: any)=>{
-    let position = 1;
+    let position = 0;
     
       this.users =   Object.keys(resp).map(a =>({
               id: a,
-              position:position+1,
+              position:position+=1,
               address: resp[a].address,
               city: resp[a].city,
               country: resp[a].country,

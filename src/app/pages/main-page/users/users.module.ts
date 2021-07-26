@@ -5,13 +5,18 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
 
 import {MatTableModule} from '@angular/material/table';
+import { JsonToStringPipe } from 'src/app/pipes/json-to-string.pipe';
 
 @NgModule({
-  declarations: [UsersComponent],
+  declarations: [UsersComponent,
+    JsonToStringPipe],
   imports: [
     CommonModule,
     UsersRoutingModule,
-    MatTableModule
+    MatTableModule,
+  ],
+  exports:[
+    JsonToStringPipe
   ]
 })
 export class UsersModule { }

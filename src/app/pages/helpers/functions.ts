@@ -10,4 +10,17 @@ export class functions  {
             return false;
           }
     }
+
+    /* ============================================
+     Función para determinar tamaños de pantalla
+    ==============================================*/
+    static screenSize(minWidth: number, maxtWidth: number): boolean{
+
+
+      if(window.matchMedia(`(min-width:${minWidth}px) and (max-width:${maxtWidth}px)`).matches){
+          return true;
+      }
+      
+      return false;
+    }
 }

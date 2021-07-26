@@ -6,6 +6,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 
 
 import {MatTableDataSource} from '@angular/material/table';
+import { functions } from '../../helpers/functions';
 
 @Component({
   selector: 'app-users',
@@ -35,6 +36,7 @@ export class UsersComponent implements OnInit {
                                     'email',
                                     'actions'];
 
+
    /* ===========================
      Variable global que instancie la tada que aparecerá en la tabla
      =========================== */  
@@ -44,12 +46,17 @@ export class UsersComponent implements OnInit {
       Variable global de usuarios
       =========================== */  
     users: Iusers[] = [];
+
+
     /* ===========================
       Variable global que informa a la vista cuando hay una expansión de la tabla.
       =========================== */  
     expandedElement!: Iusers | null;
 
-
+    /*=========================================
+      Variable global para definir tamañas de pantalla
+    =========================================*/
+    screenSizeSM = false;
   
 
 
@@ -57,6 +64,20 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
+
+    /*=========================================
+    Definir el tamaño de la pantalla
+    =========================================*/
+    if(functions.screenSize(0, 767)){
+      this.screenSizeSM = true;
+
+    }else{
+
+      this.screenSizeSM = false;
+      this.displayedColumns.splice(1,0,'displayName');
+      this.displayedColumns.splice(2,0,'username');
+
+    }
   }
 
    /* ===========================

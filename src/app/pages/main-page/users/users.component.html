@@ -23,7 +23,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <div class="row mb-2">
+          <div [hidden] = "loadData" class="row mb-2">
             <div class="col-12 col-sm-6 col-xl-3 ml-auto">
              <input class="form-control" placeholder="Search" (keyup)= "applyFilter($event)">
             </div>
@@ -34,7 +34,7 @@
 
         <div class="mat-table-container">
 
-          <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort  class="mat-elevation-z8 mapTable-table">
+          <table [hidden] = "loadData" mat-table [dataSource]="dataSource" multiTemplateDataRows matSort  class="mat-elevation-z8 mapTable-table">
 
             !-- Position Column -->
             <ng-container matColumnDef="position">
@@ -205,11 +205,20 @@
           </tr>
 
           </table>
+
+          <div *ngIf="loadData" class="text-center m-5">
+            <div class="spinner-border" >
+          </div>
+       
+
+        </div>
+
+
         </div>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          <mat-paginator [hidden] = "loadData" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
         </div>
         <!-- /.card-footer-->
       </div>

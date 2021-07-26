@@ -59,6 +59,11 @@ export class UsersComponent implements OnInit {
       Variable global para definir tamañas de pantalla
     =========================================*/
     screenSizeSM = false;
+
+    /*=========================================
+      Variable global para saber cuando finaliza la carga de los datos.
+    =========================================*/
+    loadData = false;
   
     /*=========================================
       Paginador
@@ -94,6 +99,8 @@ export class UsersComponent implements OnInit {
      Función para tomar la data de los usuarios
      =========================== */  
   getData(){
+    this.loadData = true;
+
     this.userService.getData()
     .subscribe((resp: any)=>{
     let position = 1;
@@ -119,6 +126,8 @@ export class UsersComponent implements OnInit {
 
      this.dataSource.paginator = this.paginator;
      this.dataSource.sort = this.sort;
+
+     this.loadData = false;
     });
   }
   /* ===========================

@@ -5,6 +5,9 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UsersComponent } from './users.component';
 
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+
 import { JsonToStringPipe } from 'src/app/pipes/json-to-string.pipe';
 
 @NgModule({
@@ -14,6 +17,8 @@ import { JsonToStringPipe } from 'src/app/pipes/json-to-string.pipe';
     CommonModule,
     UsersRoutingModule,
     MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   exports:[
     JsonToStringPipe

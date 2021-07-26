@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Iusers } from 'src/app/interface/iusers';
 import { UsersService } from 'src/app/services/users.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
-
+import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
+
 import { functions } from '../../helpers/functions';
 
 @Component({
@@ -58,7 +60,15 @@ export class UsersComponent implements OnInit {
     =========================================*/
     screenSizeSM = false;
   
+    /*=========================================
+      Paginador
+    =========================================*/
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+    /*=========================================
+      Ordern
+    =========================================*/
+    @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private userService: UsersService) { }
 
@@ -106,6 +116,16 @@ export class UsersComponent implements OnInit {
       }as Iusers))
 
      this.dataSource = new MatTableDataSource(this.users);
+
+     this.dataSource.paginator = this.paginator;
+     this.dataSource.sort = this.sort;
     });
+  }
+  /* ===========================
+     Función para aplicar filtros de búsqueda
+     =========================== */  
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

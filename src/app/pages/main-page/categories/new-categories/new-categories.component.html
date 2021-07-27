@@ -1,14 +1,61 @@
-<div mat-dialog-content>
-    My favorite animal is:
-    <ul>
-      <li>
-        Panda
-      </li>
-      <li>
-        Unicorn
-      </li>
-      <li>
-         Lion
-      </li>
-    </ul>
+<mat-dialog-content>
+
+  <div class="card card-warning">
+
+    <div class="card-header">
+      <h4>New category</h4>
+    </div>
+    <form>
+      <div class="card-body">
+        
+        <!-- Icon -->
+        <div class="form-group">
+          <label for="InputIcon">Icon</label>
+          <input type="text" id="InputIcon" class="form-control" placeholder="Icon">
+          <span class="invalid-feedback"> Please provide a icon</span>
+        </div>
+
+        <!-- Image -->
+        <div class="form-group">
+          <label for="customFile">
+              <img src="../../../../../assets/img/categories/default-logo.jpg" width="150" class="img-fluid">
+          </label>
+
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose Image</label>
+          </div>   
+        </div>
+
+
+        <!-- Name --> 
+        <div class="form-group">
+          <label for="InputName">Name</label>
+          <input type="text" id="InputName" class="form-control" placeholder="Name">
+          <span class="invalid-feedback"> Please provide a name</span>
+        </div>
+
+        <!-- Url --> 
+        <div class="form-group">
+          <label for="InputUrl">Url</label>
+          <input type="text" id="InputUrl" class="form-control" placeholder="Url">
+          <span class="invalid-feedback"> Please provide a url</span>
+        </div>
+
+         <!-- Title list --> 
+         <div class="form-group">
+          <label for="InputTitleList">Title list</label>
+          <input type="text" id="InputTitleList" class="form-control" placeholder="Title list">
+          <span class="invalid-feedback"> Please provide a Title list</span>
+        </div>
+
+      </div>
+
+      <div class="card-footer">
+        <button type="submit" class="btn btn-warning">Save</button>
+        <button mat-dialog-close class="btn btn-secondary float-right">Close</button>
+      </div>
+  </form>
   </div>
+
+</mat-dialog-content>

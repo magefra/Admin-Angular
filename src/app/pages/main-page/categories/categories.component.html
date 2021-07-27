@@ -23,19 +23,125 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Title</h3>
+          <div [hidden] = "loadData" class="row mb-2">
+            <div class="col-12 col-sm-6 col-xl-3 ml-auto">
+             <input class="form-control" placeholder="Search" (keyup)= "applyFilter($event)">
+            </div>
 
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i class="fas fa-times"></i>
-            </button>
           </div>
         </div>
         <div class="card-body">
-          Start creating your amazing application!
+          <div class="mat-table-container">
+
+            <table [hidden] = "loadData" mat-table [dataSource]="dataSource" multiTemplateDataRows matSort  class="mat-elevation-z8 mapTable-table">
+  
+              !-- Position Column -->
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+              </ng-container>
+  
+    
+  
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+  
+
+
+            <!-- Url name Column -->
+            <ng-container *ngIf="!screenSizeSM" matColumnDef="url">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Url </th>
+              <td mat-cell *matCellDef="let element"> {{element.url}} </td>
+            </ng-container>
+  
+               <!-- image name Column -->
+               <ng-container *ngIf="!screenSizeSM" matColumnDef="image">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Image </th>
+                <td mat-cell *matCellDef="let element"> {{element.image}} </td>
+              </ng-container>
+
+
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                  <th mat-header-cell *matHeaderCellDef> Actions </th>
+                  <td mat-cell *matCellDef="let element">
+                    <button class="btn btn-ms btn-warning mr-2" 
+                    (click)="expandedElement = expandedElement === element ? null : element">
+                      <i class="fas fa-eye"></i>
+                    </button>  
+                  </td>
+                </ng-container>
+  
+                <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+              <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                  <div class="example-element-detail"
+                      [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                   
+                      <ul class="pl-0">
+                        <li class="py-2" *ngIf="screenSizeSM">
+                          <span class="mx-2 text-muted">·</span>
+                          <strong class=" mat-header-cell">Url: </strong>
+                          {{element.url}}
+                        </li>
+  
+                        <li class="py-2" *ngIf="screenSizeSM">
+                          <span class="mx-2 text-muted">·</span>
+                          <strong class=" mat-header-cell">Image: </strong>
+                          {{element.image}}
+                        </li>
+
+                
+  
+                        <li class="py-2" *ngIf="screenSizeSM">
+                          <span class="mx-2 text-muted">·</span>
+                          <strong class=" mat-header-cell">Icon: </strong>
+                          {{element.icon}}
+                        </li>
+                        <li class="py-2">
+                          <span class="mx-2 text-muted">·</span>
+                          <strong class=" mat-header-cell">Title list: </strong>
+                          {{element.title_list | jsonToString}}
+                        </li>
+                        <li class="py-2">
+                          <span class="mx-2 text-muted">·</span>
+                          <strong class=" mat-header-cell">View: </strong>
+                          {{element.view}}
+                        </li>
+                        
+                      </ul>
+                  </div>
+                </td>
+              </ng-container>
+  
+  
+           
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+              class="example-element-row"
+              [class.example-expanded-row]="expandedElement === element">
+          </tr>
+          <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" [attr.colspan]="displayedColumns.length">No data matching the filter </td>
+            </tr>
+  
+            </table>
+  
+            <div *ngIf="loadData" class="text-center m-5">
+              <div class="spinner-border" >
+            </div>
+         
+  
+          </div>
+  
+  
+          </div>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">

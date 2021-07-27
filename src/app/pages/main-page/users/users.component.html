@@ -90,10 +90,10 @@
                           <img src="{{element.picture}}" class="rounded-circle" width="100">
                         </div>
                         <div *ngIf="element.method == 'direct'">
-                          <div *ngIf="element.picture === '' || element.picture == undefined ">
+                          <div *ngIf="element.picture == undefined ">
                             <img src="{{path}}users/default/default.png" class="rounded-circle" width="100">
                           </div>
-                          <div *ngIf=" element.picture != undefined ">
+                          <div *ngIf="element.picture != undefined ">
                             <img src="{{path}}users/{{element.username}}/{{element.picture}}" class="rounded-circle" width="100">
                           </div>
                         </div>                         

@@ -8,15 +8,18 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { PipesModule } from 'src/app/pipes/pipes.module';
+import {MatDialogModule} from '@angular/material/dialog';
+import { NewCategoriesComponent } from './new-categories/new-categories.component';
 
 @NgModule({
-  declarations: [CategoriesComponent],
+  declarations: [CategoriesComponent, NewCategoriesComponent],
   imports: [
     CommonModule,
     CategoriesRoutingModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatDialogModule,
     PipesModule
   ]
 })

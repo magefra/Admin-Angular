@@ -7,6 +7,9 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
+import {MatDialog} from '@angular/material/dialog';
+
+import {NewCategoriesComponent} from './new-categories/new-categories.component';
 
 import { functions } from '../../helpers/functions';
 
@@ -76,7 +79,7 @@ export class CategoriesComponent implements OnInit {
     =========================================*/
     @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private userService: CategoriesService) { }
+  constructor(private userService: CategoriesService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getData();
@@ -137,6 +140,14 @@ export class CategoriesComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
 
+  }
+
+
+  /* ======================================================
+    función para llamar el diálogo de creación de categorías
+  ========================================================= */
+  newCategory(){
+    const dialogRef = this.dialog.open(NewCategoriesComponent);
   }
 
 }

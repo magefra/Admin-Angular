@@ -12,7 +12,7 @@ export class NewCategoriesComponent implements OnInit {
     {
      'icon':['', Validators.required],
      'image': ['', Validators.required],
-     'name': ['', Validators.required],
+     'name': ['', [Validators.required, Validators.pattern('[a-zA-ZáéíóúñÁÉÍÓÚñ ]*')]],
      'url': ['', Validators.required],
      'title_list': ['', Validators.required]
     });
@@ -33,6 +33,7 @@ export class NewCategoriesComponent implements OnInit {
   /* ====================================
       Validación personalizada 
   ===================================== */
+  get name() {return this.f.controls.name}
   get image() {return this.f.controls.image}
   
   
@@ -47,6 +48,8 @@ export class NewCategoriesComponent implements OnInit {
 
   saveCategory(){
     this.formSubmited  = true;
+
+    console.log(this.f);
 
     if(this.f.invalid){
       return;

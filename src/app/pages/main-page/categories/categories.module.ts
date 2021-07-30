@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CategoriesRoutingModule } from './categories-routing.module';
 import { CategoriesComponent } from './categories.component';
 
+
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
@@ -11,6 +12,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { NewCategoriesComponent } from './new-categories/new-categories.component';
+
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +25,8 @@ import { NewCategoriesComponent } from './new-categories/new-categories.componen
     MatPaginatorModule,
     MatSortModule,
     MatDialogModule,
-    PipesModule
+    PipesModule,
+    ReactiveFormsModule
   ]
 })
 export class CategoriesModule { }

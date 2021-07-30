@@ -3,27 +3,50 @@
   <div class="card card-warning">
 
     <div class="card-header">
-      <h4>New category</h4>
+      <h4 class="card-title mb-0">New category</h4>
     </div>
-    <form>
+    <form  
+          autocomplete="false"
+          [formGroup] = "f"
+          (ngSubmit) = "saveCategory()"
+          >
       <div class="card-body">
         
         <!-- Icon -->
         <div class="form-group">
-          <label for="InputIcon">Icon</label>
-          <input type="text" id="InputIcon" class="form-control" placeholder="Icon">
+          <label for="InputIcon">Icon (<a href="https://linearicons.com/free" target="blank">Available icons</a>)</label>
+          <input 
+                type="text" 
+                id="InputIcon" 
+                class="form-control" 
+                placeholder="Icon"
+                formControlName = "icon"
+                [ngClass] = "{'is-invalid' : invalidField('icon')}"
+                >
           <span class="invalid-feedback"> Please provide a icon</span>
         </div>
 
         <!-- Image -->
         <div class="form-group">
           <label for="customFile">
-              <img src="../../../../../assets/img/categories/default-logo.jpg" width="150" class="img-fluid">
+              <img *ngIf= "!imgTemp"  src="../../../../../assets/img/categories/default-logo.jpg" width="150" class="img-fluid">
+              <img  *ngIf= "imgTemp" [src]="imgTemp" alt="" class="img-fluid">
           </label>
 
           <div class="custom-file">
-            <input type="file" class="custom-file-input" id="customFile">
-            <label class="custom-file-label" for="customFile">Choose Image</label>
+            <input 
+                 type="file" 
+                 class="custom-file-input" 
+                 id="customFile"
+                 formControlName = "image"
+                (change) = "validateImage($event)"
+                [ngClass] = "{'is-invalid' : invalidField('image')}"
+                 >
+            <span class="invalid-feedback"> Please provide a image</span>
+            <label class="custom-file-label" for="customFile" *ngIf= "!image.value">Choose Image</label>
+            <label class="custom-file-label" for="customFile" *ngIf= "image.value">{{image.value}}</label>
+            
+            <small class="mt-2">170px * 170px size | jpg or png format</small>
           </div>   
         </div>
 
@@ -31,29 +54,51 @@
         <!-- Name --> 
         <div class="form-group">
           <label for="InputName">Name</label>
-          <input type="text" id="InputName" class="form-control" placeholder="Name">
+          <input 
+               type="text" 
+               id="InputName" 
+               class="form-control" 
+               placeholder="Name"
+               formControlName = "name"
+               [ngClass] = "{'is-invalid' : invalidField('name')}"
+               >
           <span class="invalid-feedback"> Please provide a name</span>
         </div>
 
         <!-- Url --> 
         <div class="form-group">
           <label for="InputUrl">Url</label>
-          <input type="text" id="InputUrl" class="form-control" placeholder="Url">
+          <input 
+                type="text" 
+                id="InputUrl" 
+                class="form-control" 
+                placeholder="Url"
+                formControlName = "url"
+                [ngClass] = "{'is-invalid' : invalidField('url')}"
+                >
           <span class="invalid-feedback"> Please provide a url</span>
         </div>
 
          <!-- Title list --> 
          <div class="form-group">
           <label for="InputTitleList">Title list</label>
-          <input type="text" id="InputTitleList" class="form-control" placeholder="Title list">
+          <input 
+                type="text" 
+                id="InputTitleList" 
+                class="form-control" 
+                placeholder="Title list"
+                formControlName = "title_list"
+                [ngClass] = "{'is-invalid' : invalidField('title_list')}"
+                >
           <span class="invalid-feedback"> Please provide a Title list</span>
         </div>
 
       </div>
 
       <div class="card-footer">
-        <button type="submit" class="btn btn-warning">Save</button>
-        <button mat-dialog-close class="btn btn-secondary float-right">Close</button>
+       
+        <button mat-dialog-close class="btn btn-secondary ">Close</button>
+        <button type="submit" class="btn btn-warning float-right">Save</button>
       </div>
   </form>
   </div>

@@ -9,11 +9,15 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
 
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { NewCategoriesComponent } from './new-categories/new-categories.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
+
+
 
 
 @NgModule({
@@ -26,7 +30,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSortModule,
     MatDialogModule,
     PipesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatChipsModule,
+    MatIconModule
   ]
 })
 export class CategoriesModule { }

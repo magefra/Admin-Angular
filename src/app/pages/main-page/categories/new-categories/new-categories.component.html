@@ -75,10 +75,9 @@
                 id="InputUrl" 
                 class="form-control" 
                 placeholder="Url"
-                formControlName = "url"
-                [ngClass] = "{'is-invalid' : invalidField('url')}"
+                value = "{{urlInput}}"
+                readonly
                 >
-          <span class="invalid-feedback"> Please provide a url</span>
         </div>
 
          <!-- Title list --> 
@@ -93,6 +92,28 @@
                 [ngClass] = "{'is-invalid' : invalidField('title_list')}"
                 >
           <span class="invalid-feedback"> Please provide a Title list</span>
+        </div>
+
+
+        <div class="form-group">
+          <label > Favorite Fruits</label>
+          <div class="form-control">
+
+          <mat-chip-list #chipList aria-label="Fruit selection">
+           
+            <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                     [removable]="removable" (removed)="remove(fruit)">
+              {{fruit.name}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+
+            <input placeholder="New fruit..."
+                   [matChipInputFor]="chipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+        </div>
         </div>
 
       </div>

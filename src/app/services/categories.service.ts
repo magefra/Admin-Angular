@@ -18,6 +18,12 @@ export class CategoriesService {
     return this.http.get(`${environment.urlFirebase}categories.json`);
   } 
   
+  /* ==============================================
+     Tomar data filtrada de la colección de categorías de Firebase
+  ================================================ */
 
+  getFilterData(orderBy:string,equalTo: string){
+      return this.http.get(`${environment.urlFirebase}categories.json?orderBy="${orderBy}"&equalTo="${equalTo}"&print=pretty`);
+  }
 
 }

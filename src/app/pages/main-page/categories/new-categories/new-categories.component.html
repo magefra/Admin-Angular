@@ -60,10 +60,11 @@
                class="form-control" 
                placeholder="Name"
                formControlName = "name"
-               [ngClass] = "{'is-invalid' : invalidField('name') || name.invalid || name.errors?.pattern }"
+               [ngClass] = "{'is-invalid' : invalidField('name') || name.invalid && name.errors?.pattern || name.invalid && name.errors?.category }"
                >
           <span class="invalid-feedback" *ngIf = "name.invalid && name.errors?.required"> Please provide a name</span>
           <span class="invalid-feedback" *ngIf = "name.invalid && name.errors?.pattern"> Please wrote the name correctly</span>
+          <span class="invalid-feedback" *ngIf = "name.invalid && name.errors?.category"> The category already exists</span>
         </div>
 
         <!-- Url --> 

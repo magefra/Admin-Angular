@@ -15,14 +15,25 @@
         <!-- Icon -->
         <div class="form-group">
           <label for="InputIcon">Icon (<a href="https://linearicons.com/free" target="blank">Available icons</a>)</label>
-          <input 
-                type="text" 
-                id="InputIcon" 
-                class="form-control" 
-                placeholder="Icon"
-                formControlName = "icon"
-                [ngClass] = "{'is-invalid' : invalidField('icon')}"
-                >
+
+          <div class="input-group">
+            <input 
+                  type="text" 
+                  id="InputIcon" 
+                  class="form-control" 
+                  placeholder="Icon"
+                  formControlName = "icon"
+                  [ngClass] = "{'is-invalid' : invalidField('icon')}"
+                  (change) = "viewIcon($event)"
+                  >
+
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <div [innerHTML] = "iconView"></div>
+                    </div>
+                  </div>
+          </div>
+          
           <span class="invalid-feedback"> Please provide a icon</span>
         </div>
 
@@ -80,40 +91,35 @@
                 >
         </div>
 
-         <!-- Title list --> 
-         <div class="form-group">
-          <label for="InputTitleList">Title list</label>
-          <input 
-                type="text" 
-                id="InputTitleList" 
-                class="form-control" 
-                placeholder="Title list"
-                formControlName = "title_list"
-                [ngClass] = "{'is-invalid' : invalidField('title_list')}"
-                >
-          <span class="invalid-feedback"> Please provide a Title list</span>
-        </div>
+         
 
 
         <div class="form-group">
-          <label > Favorite Fruits</label>
-          <div class="form-control">
+          <label > Title List</label>
+          <div class="form-control" [ngClass] = "{'is-invalid' : invalidField('title_list')}">
 
           <mat-chip-list #chipList aria-label="Fruit selection">
            
-            <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
-                     [removable]="removable" (removed)="remove(fruit)">
-              {{fruit.name}}
+            <mat-chip *ngFor="let title of titleList.value" [selectable]="selectable"
+                     [removable]="removable" (removed)="remove(title)">
+              {{title}}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
 
-            <input placeholder="New fruit..."
+            <input placeholder="New title..."
                    [matChipInputFor]="chipList"
                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                    [matChipInputAddOnBlur]="addOnBlur"
-                   (matChipInputTokenEnd)="add($event)">
+                   (matChipInputTokenEnd)="add($event)"
+                   >
+
+
           </mat-chip-list>
+
+         
         </div>
+        <span class="invalid-feedback" *ngIf = "titleList.invalid && titleList.errors?.required"> Please provide a Title list</span>
+        <span class="invalid-feedback" *ngIf = "titleList.invalid && titleList.errors?.pattern"> Write the Title List correctly</span>
         </div>
 
       </div>

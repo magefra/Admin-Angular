@@ -5,10 +5,9 @@ import { functions } from '../../../helpers/functions';
 
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
+import { Icategories } from 'src/app/interface/icategories';
+import { stringify } from '@angular/compiler/src/util';
 
-export interface Fruit {
-  name: string;
-}
 
 
 @Component({
@@ -24,7 +23,7 @@ export class NewCategoriesComponent implements OnInit {
      'image': ['', Validators.required],
      //'name': ['', [Validators.required, Validators.pattern('[a-zA-ZáéíóúñÁÉÍÓÚñ ]*')]],
      'name': ['', {validators: [Validators.required, Validators.pattern('[,\\a-zA-ZáéíóúñÁÉÍÓÚñ ]*')], asyncValidators: [this.isRepeatCategory()], updateOn:'blur'}],
-     'title_list': ['', Validators.required]
+     'title_list': [[], [Validators.required, Validators.pattern('["\\[\\]\\-\\,\\0-9a-zA-ZáéíóúñÁÉÍÓÚñ ]*') ]]
     });
 
 
@@ -47,12 +46,11 @@ export class NewCategoriesComponent implements OnInit {
     removable = true;
     addOnBlur = true;
     readonly separatorKeysCodes = [ENTER, COMMA] as const;
-    fruits: Fruit[] = [
-      {name: 'Lemon'},
-      {name: 'Lime'},
-      {name: 'Apple'},
-    ];
-  
+
+     /* =========================
+       Visualizar el icono
+      ========================== */
+      iconView = "";
 
   constructor(private fb: FormBuilder,
               private categoriesService: CategoriesService) { }
@@ -65,7 +63,8 @@ export class NewCategoriesComponent implements OnInit {
   ===================================== */
   get name() {return this.f.controls.name}
   get image() {return this.f.controls.image}
-  
+  get titleList() {return this.f.controls.title_list}
+  get icon() {return this.f.controls.icon}
   
 
   invalidField(field: string)
@@ -77,13 +76,36 @@ export class NewCategoriesComponent implements OnInit {
 
 
   saveCategory(){
+
+     /* =============================================
+        Validamos que el formulario haya sido enviado
+        ============================================= */
     this.formSubmited  = true;
 
-    console.log(this.f);
 
+     /* =============================================
+        Validamos que el formulario este correcto
+        ============================================= */
     if(this.f.invalid){
       return;
     }
+    
+    
+     /* =============================================
+        Capturamos la información del formulario en la interfaz
+        ============================================= */
+
+    const dataCategory: Icategories = {
+            icon: this.f.controls.icon.value.split('"')[1],
+            image: '',
+            name: this.f.controls.name.value,
+            title_list: JSON.stringify(this.f.controls.title_list.value),
+            url : this.urlInput,
+            view: 0
+
+    };
+
+    console.log(dataCategory);
 
 
   }
@@ -119,7 +141,7 @@ export class NewCategoriesComponent implements OnInit {
                     }else{
 
                       this.urlInput = name;
-                      resolve({category: false})
+                      
                     }
                   }
 
@@ -132,23 +154,41 @@ export class NewCategoriesComponent implements OnInit {
      add(event: MatChipInputEvent): void {
       const value = (event.value || '').trim();
   
-      // Add our fruit
+      // Add our title list
       if (value) {
-        this.fruits.push({name: value});
+        this.f.controls.title_list.value.push(value.trim());
       }
   
       // Clear the input value
       if (event.input) {
         event.input.value = '';
       }
+
+      this.f.controls.title_list.updateValueAndValidity();
+
     }
 
-    remove(fruit: Fruit): void {
-      const index = this.fruits.indexOf(fruit);
+    remove(title: any): void {
+      const index = this.f.controls.title_list.value.indexOf(title);
   
       if (index >= 0) {
-        this.fruits.splice(index, 1);
+        this.f.controls.title_list.value.splice(index, 1);
       }
+
+      this.f.controls.title_list.updateValueAndValidity();
     }
+
+
+
+    /* =======================================
+       Visualizar el icono
+    ========================================= */
+    viewIcon(e: any){
+      this.iconView = e.target.value;
+      e.target.value = this.f.controls.icon.value.split('"')[1];
+
+
+    }
+    
 
 }

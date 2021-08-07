@@ -7,6 +7,7 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
 import { Icategories } from 'src/app/interface/icategories';
 import { stringify } from '@angular/compiler/src/util';
+import { ImagesService } from 'src/app/services/images.service';
 
 
 
@@ -53,7 +54,8 @@ export class NewCategoriesComponent implements OnInit {
       iconView = "";
 
   constructor(private fb: FormBuilder,
-              private categoriesService: CategoriesService) { }
+              private categoriesService: CategoriesService,
+              private imagenService: ImagesService) { }
 
   ngOnInit(): void {
   }
@@ -90,6 +92,11 @@ export class NewCategoriesComponent implements OnInit {
       return;
     }
     
+
+     /* =============================================
+        subir la imagen al servidor
+        ============================================= */
+        this.imagenService.uploadImagen()
     
      /* =============================================
         Capturamos la información del formulario en la interfaz

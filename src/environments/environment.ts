@@ -7,7 +7,8 @@ export const environment = {
   urlFirebase : 'https://admin-mp-ab7bb-default-rtdb.firebaseio.com/',
   urlLogin : 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBNydZHVThHy2nMs1k4PiaRw5mkN19P9Bs',
   urlGetUser: 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyBNydZHVThHy2nMs1k4PiaRw5mkN19P9Bs',
-  urlFiles: 'http://localhost/sistemas-angular/marketplace/src/assets/img/'
+  urlFiles: 'http://localhost/sistemas-angular/marketplace/src/assets/img/',
+  adminFiles: 'http://localhost/sistemas-angular/marketplace/src/assets/img/index.php?key=AIzaSyBNydZHVThHy2nMs1k4PiaRw5mkN19P9Bs'
 };
 
 /*

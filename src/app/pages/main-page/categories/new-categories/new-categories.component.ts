@@ -11,6 +11,8 @@ import { ImagesService } from 'src/app/services/images.service';
 import { alerts } from 'src/app/pages/helpers/alert';
 
 
+import {MatDialogRef}  from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-new-categories',
@@ -61,9 +63,17 @@ export class NewCategoriesComponent implements OnInit {
 
       uploadFile = "";
 
+
+       /* =========================
+       Variable para recargar
+      ========================== */
+
+      loadData = false;
+
   constructor(private fb: FormBuilder,
               private categoriesService: CategoriesService,
-              private imagenService: ImagesService) { }
+              private imagenService: ImagesService,
+              public dialogRef : MatDialogRef<NewCategoriesComponent>) { }
 
   ngOnInit(): void {
   }
@@ -86,6 +96,8 @@ export class NewCategoriesComponent implements OnInit {
 
 
   saveCategory(){
+
+    this.loadData = true;
 
      /* =============================================
         Validamos que el formulario haya sido enviado
@@ -127,7 +139,11 @@ export class NewCategoriesComponent implements OnInit {
              this.categoriesService.postData(dataCategory, localStorage.getItem('token'))
              .subscribe(
               resp => {
-                  alerts.basicAlert("Ok", 'The category has been saved', "success")
+                  this.dialogRef.close('save');
+                
+                  alerts.basicAlert("Ok", 'The category has been saved', "success");
+
+
               }, 
               err =>{
                   alerts.basicAlert("Error", "Category saviing errror", "error");
@@ -140,7 +156,7 @@ export class NewCategoriesComponent implements OnInit {
         });
     
    
-
+        this.loadData = false;
 
   }
 

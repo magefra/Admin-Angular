@@ -13,6 +13,9 @@
           >
       <div class="card-body">
         
+        <ng-container *ngIf=!loadData>
+
+        
         <!-- Icon -->
         <div class="form-group">
           <label for="InputIcon">Icon (<a href="https://linearicons.com/free" target="blank">Available icons</a>)</label>
@@ -122,7 +125,11 @@
         <span class="invalid-feedback" *ngIf = "titleList.invalid && titleList.errors?.required"> Please provide a Title list</span>
         <span class="invalid-feedback" *ngIf = "titleList.invalid && titleList.errors?.pattern"> Write the Title List correctly</span>
         </div>
+         </ng-container>
 
+         <div *ngIf="loadData" class="overlay">
+           <i class="fas fa-2x fa-sync-alt fa-spin"></i>
+         </div>
       </div>
 
       <div class="card-footer">

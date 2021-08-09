@@ -148,6 +148,17 @@ export class CategoriesComponent implements OnInit {
   ========================================================= */
   newCategory(){
     const dialogRef = this.dialog.open(NewCategoriesComponent);
+
+      /* ======================================================
+        Actualizar el listado de la tabla
+      ========================================================= */
+      dialogRef.afterClosed().subscribe(
+        result =>{
+          if(result){
+            this.getData();
+          }
+        }
+      );
   }
 
 }

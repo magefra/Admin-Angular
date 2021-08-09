@@ -8,6 +8,7 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import { Icategories } from 'src/app/interface/icategories';
 import { stringify } from '@angular/compiler/src/util';
 import { ImagesService } from 'src/app/services/images.service';
+import { alerts } from 'src/app/pages/helpers/alert';
 
 
 
@@ -53,6 +54,13 @@ export class NewCategoriesComponent implements OnInit {
       ========================== */
       iconView = "";
 
+
+  /* =========================
+       Subir la imagen al servidor
+      ========================== */
+
+      uploadFile = "";
+
   constructor(private fb: FormBuilder,
               private categoriesService: CategoriesService,
               private imagenService: ImagesService) { }
@@ -96,23 +104,42 @@ export class NewCategoriesComponent implements OnInit {
      /* =============================================
         subir la imagen al servidor
         ============================================= */
-        this.imagenService.uploadImagen()
+        this.imagenService.uploadImagen(this.uploadFile, "categories", "",170, 170)
+        .subscribe( (resp: any) =>{
+            if(resp.status ===200){
+                /* =============================================
+                  Capturamos la información del formulario en la interfaz
+                   ============================================= */
+
+                  const dataCategory: Icategories = {
+                    icon: this.f.controls.icon.value.split('"')[1],
+                    image: resp.result,
+                    name: this.f.controls.name.value,
+                    title_list: JSON.stringify(this.f.controls.title_list.value),
+                    url : this.urlInput,
+                    view: 0
+
+              };
+
+           /* =============================================
+              Guardar en la base de datos la info de la categoria.
+              ============================================= */
+             this.categoriesService.postData(dataCategory, localStorage.getItem('token'))
+             .subscribe(
+              resp => {
+                  alerts.basicAlert("Ok", 'The category has been saved', "success")
+              }, 
+              err =>{
+                  alerts.basicAlert("Error", "Category saviing errror", "error");
+              }
+
+             );
+            }else{
+              alerts.basicAlert("Error", "Invalid Picture", "error");
+            }
+        });
     
-     /* =============================================
-        Capturamos la información del formulario en la interfaz
-        ============================================= */
-
-    const dataCategory: Icategories = {
-            icon: this.f.controls.icon.value.split('"')[1],
-            image: '',
-            name: this.f.controls.name.value,
-            title_list: JSON.stringify(this.f.controls.title_list.value),
-            url : this.urlInput,
-            view: 0
-
-    };
-
-    console.log(dataCategory);
+   
 
 
   }
@@ -121,6 +148,8 @@ export class NewCategoriesComponent implements OnInit {
   validateImage(e: any){
     functions.validateImage(e).then( (resp:any) =>{
         this.imgTemp = resp;
+
+        this.uploadFile = e;
     });
   }
 

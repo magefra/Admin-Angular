@@ -15,9 +15,13 @@ export class ImagesService {
     Función para subir las imagenes al servidor
     ============================================ */
 
-    uploadImagen(){
+    uploadImagen(file : any, path: string, folder: string, width: number, height: number){
       var formData = new FormData();
-      formData.append();
+      formData.append("file", file.target.files[0]);
+      formData.append("path", path);
+      formData.append("folder", folder);
+      formData.append("width", width.toString());
+      formData.append("height", height.toString());
 
       return this.http.post(environment.adminFiles, formData);
     }

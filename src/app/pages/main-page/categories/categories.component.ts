@@ -107,17 +107,18 @@ export class CategoriesComponent implements OnInit {
 
     this.userService.getData()
     .subscribe((resp: any)=>{
-    let position = 0;
+    let position = Object.keys(resp).length;
     
       this.categories =   Object.keys(resp).map(a =>({
               id: a,
-              position:position+=1,
+              position:position--,
               name: resp[a].name,
               icon: resp[a].icon,
               image: resp[a].image,
               title_list: resp[a].title_list,
               url:resp[a].url,
-              view: resp[a].view
+              view: resp[a].view,
+              state : resp[a].state
       }as Icategories))
 
       console.log(this.categories);

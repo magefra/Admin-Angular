@@ -38,7 +38,13 @@
         <div class="card-body">
           <div class="mat-table-container">
 
-            <table [hidden] = "loadData" mat-table [dataSource]="dataSource" multiTemplateDataRows matSort  class="mat-elevation-z8 mapTable-table">
+            <table [hidden] = "loadData"
+             mat-table [dataSource]="dataSource" 
+             multiTemplateDataRows
+             matSort  
+             matSortActive="position"
+             matSortDirection = "asc"
+             class="mat-elevation-z8 mapTable-table">
   
               !-- Position Column -->
               <ng-container matColumnDef="position">
@@ -116,7 +122,29 @@
                           <strong class=" mat-header-cell">View: </strong>
                           {{element.view}}
                         </li>
+
+                        <li class="py-1">
+                          <div class="custom-control custom-switch">
+                            <input
+                                 type="checkbox" 
+                                 class="custom-control-input" 
+                                 id="switch_{{element.id}}"
+                                 *ngIf="element.state== 'show'"
+                                 checked
+                                 >
+
+                             <input
+                                 type="checkbox" 
+                                 class="custom-control-input" 
+                                 id="switch_{{element.id}}"
+                                 *ngIf="element.state != 'show'"
+                              >
+                            <label class="custom-control-label" for="switch_{{element.id}}"></label>
+                          </div>
+                         </li>
                         
+
+
                       </ul>
                   </div>
                 </td>

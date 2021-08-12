@@ -129,7 +129,8 @@ export class NewCategoriesComponent implements OnInit {
                     name: this.f.controls.name.value,
                     title_list: JSON.stringify(this.f.controls.title_list.value),
                     url : this.urlInput,
-                    view: 0
+                    view: 0,
+                    state: "hidden"
 
               };
 

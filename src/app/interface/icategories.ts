@@ -4,5 +4,6 @@ export interface Icategories {
     name: string,
     title_list: string,
     url : string,
-    view: number
+    view: number,
+    state: string
 }

@@ -130,6 +130,7 @@
                                  class="custom-control-input" 
                                  id="switch_{{element.id}}"
                                  *ngIf="element.state== 'show'"
+                                 (change)= "changeState($event)"
                                  checked
                                  >
 
@@ -138,6 +139,7 @@
                                  class="custom-control-input" 
                                  id="switch_{{element.id}}"
                                  *ngIf="element.state != 'show'"
+                                 (change)= "changeState($event)"
                               >
                             <label class="custom-control-label" for="switch_{{element.id}}"></label>
                           </div>

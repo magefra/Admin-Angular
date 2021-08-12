@@ -162,4 +162,37 @@ export class CategoriesComponent implements OnInit {
       );
   }
 
+
+  /* ==========================================
+      Función para cambiar el estado de la categoria
+    =========================================== */
+    changeState(e : any)
+    {
+        if(e.target.checked){
+          const data = {
+            'state': 'show'
+          }
+          
+          this.userService.pathData(e.target.id.split("_")[1],data, localStorage.getItem('token'))
+          .subscribe(
+
+            () =>{
+              this.getData();
+            }
+          );
+        }else{
+          const data = {
+            'state': 'hidden'
+          }
+          
+          this.userService.pathData(e.target.id.split("_")[1],data, localStorage.getItem('token'))
+          .subscribe(
+
+            () =>{
+              this.getData();
+            }
+          );
+        }
+    }
+
 }

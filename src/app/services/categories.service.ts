@@ -37,4 +37,12 @@ export class CategoriesService {
       return this.http.post(`${environment.urlFirebase}categories.json?auth=${token}`, data);
   }
 
+
+  /* =============================================
+     Actualización de los registros
+     ============================================= */
+  pathData(id:string, data: object, token: any){
+      return this.http.patch(`${environment.urlFirebase}categories/${id}.json?auth=${token}`,data);
+  }
+
 }

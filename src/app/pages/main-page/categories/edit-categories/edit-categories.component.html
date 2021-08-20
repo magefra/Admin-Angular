@@ -9,7 +9,7 @@
     <form
           autocomplete="false"
           [formGroup] = "f"
-          (ngSubmit) = "saveCategory()"
+          (ngSubmit) = "editCategory()"
           >
       <div class="card-body">
 
@@ -67,64 +67,33 @@
 
 
         <!-- Name -->
-        <div class="form-group">
+       <div class="form-group">
           <label for="InputName">Name</label>
           <input
                type="text"
                id="InputName"
                class="form-control"
                placeholder="Name"
-               formControlName = "name"
-               [ngClass] = "{'is-invalid' : invalidField('name') || name.invalid && name.errors?.pattern || name.invalid && name.errors?.category }"
+               readonly
+               value="{{nameView}}"
                >
-          <span class="invalid-feedback" *ngIf = "name.invalid && name.errors?.required"> Please provide a name</span>
-          <span class="invalid-feedback" *ngIf = "name.invalid && name.errors?.pattern"> Please wrote the name correctly</span>
-          <span class="invalid-feedback" *ngIf = "name.invalid && name.errors?.category"> The category already exists</span>
+
         </div>
+
+
 
         <!-- Url -->
         <div class="form-group">
-          <label for="InputUrl">Url</label>
+          <label for="InputUrl">Title List</label>
           <input
                 type="text"
-                id="InputUrl"
                 class="form-control"
-                placeholder="Url"
-                value = "{{urlInput}}"
+                value = "{{titleView}}"
                 readonly
                 >
         </div>
 
 
-
-
-        <div class="form-group">
-          <label > Title List</label>
-          <div class="form-control" [ngClass] = "{'is-invalid' : invalidField('title_list')}">
-
-          <mat-chip-list #chipList aria-label="Fruit selection">
-
-            <mat-chip *ngFor="let title of titleList.value" [selectable]="selectable"
-                     [removable]="removable" (removed)="remove(title)">
-              {{title}}
-              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-            </mat-chip>
-
-            <input placeholder="New title..."
-                   [matChipInputFor]="chipList"
-                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                   [matChipInputAddOnBlur]="addOnBlur"
-                   (matChipInputTokenEnd)="add($event)"
-                   >
-
-
-          </mat-chip-list>
-
-
-        </div>
-        <span class="invalid-feedback" *ngIf = "titleList.invalid && titleList.errors?.required"> Please provide a Title list</span>
-        <span class="invalid-feedback" *ngIf = "titleList.invalid && titleList.errors?.pattern"> Write the Title List correctly</span>
-        </div>
          </ng-container>
 
          <div *ngIf="loadData" class="overlay">

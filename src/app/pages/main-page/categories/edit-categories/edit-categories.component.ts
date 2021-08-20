@@ -10,6 +10,7 @@ import { stringify } from '@angular/compiler/src/util';
 import { ImagesService } from 'src/app/services/images.service';
 import { alerts } from 'src/app/pages/helpers/alert';
 import {MatDialogRef, MAT_DIALOG_DATA}  from '@angular/material/dialog';
+import { environment } from 'src/environments/environment';
 
 export interface IDialogData{
   id: string;
@@ -68,6 +69,16 @@ export class EditCategoriesComponent implements OnInit {
       ========================== */
       loadData = false;
 
+      /* =========================
+       Visualizar el nombre de la categoria
+      ========================== */
+      nameView = "";
+
+      /* =========================
+       Visualizar el listado de los titulos
+      ========================== */
+      titleView = "";
+
   constructor(private fb: FormBuilder,
               private categoriesService: CategoriesService,
               private imagenService: ImagesService,
@@ -79,7 +90,12 @@ export class EditCategoriesComponent implements OnInit {
     this.categoriesService.getItem(this.data.id)
     .subscribe(
       (resp: any)=>{
-        console.log(resp);
+        this.icon.setValue(resp.icon);
+        this.iconView = `<i class="${resp.icon}"></i>`;
+        this.imgTemp = `${environment.urlFiles}categories/${resp.image}`;
+        this.nameView = resp.name;
+        this.urlInput = resp.url;
+        this.titleView =JSON.parse(resp.title_list);
       }
     );
   }
@@ -101,7 +117,7 @@ export class EditCategoriesComponent implements OnInit {
   }
 
 
-  saveCategory(){
+  editCategory(){
 
     this.loadData = true;
 

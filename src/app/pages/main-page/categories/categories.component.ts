@@ -12,6 +12,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {NewCategoriesComponent} from './new-categories/new-categories.component';
 
 import { functions } from '../../helpers/functions';
+import { EditCategoriesComponent } from './edit-categories/edit-categories.component';
 
 @Component({
   selector: 'app-categories',
@@ -30,33 +31,33 @@ export class CategoriesComponent implements OnInit {
 
    /* ===========================
      Variable global que captura la ruta de los archivos de imagen
-     =========================== */  
+     =========================== */
      path: string = environment.urlFiles;
 
-     
-  /* ===========================
-     Variable para nombrar las columnas de nuestras tablas en material    
-     =========================== */  
 
-     displayedColumns: string[] = ['position', 
+  /* ===========================
+     Variable para nombrar las columnas de nuestras tablas en material
+     =========================== */
+
+     displayedColumns: string[] = ['position',
                                     'name',
                                     'actions'];
 
 
    /* ===========================
      Variable global que instancie la tada que aparecerá en la tabla
-     =========================== */  
+     =========================== */
     dataSource!: MatTableDataSource<Icategories>;
 
     /* ===========================
       Variable global de categorias
-      =========================== */  
+      =========================== */
     categories: Icategories[] = [];
 
 
     /* ===========================
       Variable global que informa a la vista cuando hay una expansión de la tabla.
-      =========================== */  
+      =========================== */
     expandedElement!: Icategories | null;
 
     /*=========================================
@@ -68,7 +69,7 @@ export class CategoriesComponent implements OnInit {
       Variable global para saber cuando finaliza la carga de los datos.
     =========================================*/
     loadData = false;
-  
+
     /*=========================================
       Paginador
     =========================================*/
@@ -101,14 +102,14 @@ export class CategoriesComponent implements OnInit {
 
    /* ===========================
      Función para tomar la data de los usuarios
-     =========================== */  
+     =========================== */
   getData(){
     this.loadData = true;
 
     this.userService.getData()
     .subscribe((resp: any)=>{
     let position = Object.keys(resp).length;
-    
+
       this.categories =   Object.keys(resp).map(a =>({
               id: a,
               position:position--,
@@ -132,7 +133,7 @@ export class CategoriesComponent implements OnInit {
   }
   /* ===========================
      Función para aplicar filtros de búsqueda
-     =========================== */  
+     =========================== */
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -172,7 +173,7 @@ export class CategoriesComponent implements OnInit {
           const data = {
             'state': 'show'
           }
-          
+
           this.userService.pathData(e.target.id.split("_")[1],data, localStorage.getItem('token'))
           .subscribe(
 
@@ -184,7 +185,7 @@ export class CategoriesComponent implements OnInit {
           const data = {
             'state': 'hidden'
           }
-          
+
           this.userService.pathData(e.target.id.split("_")[1],data, localStorage.getItem('token'))
           .subscribe(
 
@@ -193,6 +194,19 @@ export class CategoriesComponent implements OnInit {
             }
           );
         }
+    }
+
+    /* ==========================================
+      Función para llamar el diálogo de edición de categorías
+    =========================================== */
+    editCategory(id: string){
+      const dialogRef = this.dialog.open(EditCategoriesComponent, {
+        data: {
+          id:id
+        }
+      });
+
+
     }
 
 }

@@ -10,15 +10,15 @@ import { Icategories } from '../interface/icategories';
 export class CategoriesService {
 
   constructor(private http: HttpClient) { }
-  
+
   /* ==============================================
      Tomar la data de las categorias
   ================================================ */
 
   getData(){
     return this.http.get(`${environment.urlFirebase}categories.json`);
-  } 
-  
+  }
+
   /* ==============================================
      Tomar data filtrada de la colección de categorías de Firebase
   ================================================ */
@@ -27,12 +27,10 @@ export class CategoriesService {
       return this.http.get(`${environment.urlFirebase}categories.json?orderBy="${orderBy}"&equalTo="${equalTo}"&print=pretty`);
   }
 
- 
+
   /* ==============================================
      Guardar información de la categoria
   ================================================ */
-
-
   postData(data: Icategories, token: any){
       return this.http.post(`${environment.urlFirebase}categories.json?auth=${token}`, data);
   }
@@ -43,6 +41,15 @@ export class CategoriesService {
      ============================================= */
   pathData(id:string, data: object, token: any){
       return this.http.patch(`${environment.urlFirebase}categories/${id}.json?auth=${token}`,data);
+  }
+
+
+  /* =============================================
+     Tomar un item de la data colección de categorias en Firebase
+     ============================================= */
+
+  getItem(id: string){
+    return this.http.get(`${environment.urlFirebase}categories/${id}.json`);
   }
 
 }

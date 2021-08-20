@@ -16,12 +16,13 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
 import { NewCategoriesComponent } from './new-categories/new-categories.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditCategoriesComponent } from './edit-categories/edit-categories.component';
 
 
 
 
 @NgModule({
-  declarations: [CategoriesComponent, NewCategoriesComponent],
+  declarations: [CategoriesComponent, NewCategoriesComponent, EditCategoriesComponent],
   imports: [
     CommonModule,
     CategoriesRoutingModule,
